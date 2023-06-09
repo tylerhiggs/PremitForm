@@ -1,0 +1,169 @@
+query GetForm($id: Int!) {
+  form(id: $id) {
+    __typename
+    id
+    title
+    questions {
+      __typename
+      id
+      index
+      content
+      multiple
+      options {
+        __typename
+        id
+        index
+        content
+      }
+      logics {
+        __typename
+        id
+        index
+        isIf
+        isElse
+        options {
+          id
+          index
+        }
+        isReturn
+        formOutput {
+          id
+          title
+        }
+        nextQuestion {
+          id
+          index
+        }
+      }
+    }
+  }
+}
+
+mutation SetFormTitle($id: Int!, $title: String!) {
+  updateForm(id: $id, title: $title) {
+    id
+    title
+  }
+}
+
+mutation CreateQuestion($formId: Int!) {
+  createQuestion(formId: $formId) {
+    id
+    index
+    content
+    multiple
+  }
+}
+
+mutation UpdateQuestion(
+  $id: Int!
+  $index: Int
+  $content: String
+  $multiple: Boolean
+) {
+  updateQuestion(
+    id: $id
+    index: $index
+    content: $content
+    multiple: $multiple
+  ) {
+    id
+    index
+    content
+    multiple
+  }
+}
+
+mutation UpdateOption($id: Int!, $content: String) {
+  updateOption(id: $id, content: $content) {
+    id
+    index
+    content
+  }
+}
+
+mutation CreateOption($questionId: Int!) {
+  createOption(questionId: $questionId) {
+    id
+    index
+    content
+  }
+}
+
+mutation DeleteQuestion($id: Int!) {
+  deleteQuestion(id: $id)
+}
+
+mutation deleteOption($id: Int!) {
+  deleteOption(id: $id)
+}
+
+# mutation createLogic($questionId: Int!, isElse: Boolean!) {
+#   createLogic(questionId: $questionId, isElse: $isElse) {
+#     __typename
+#   }
+# }
+
+mutation deleteLogic($id: Int!) {
+  deleteLogic(id: $id)
+}
+
+mutation createLogic($questionId: Int!, $isElse: Boolean!) {
+  createLogic(questionId: $questionId, isElse: $isElse) {
+    __typename
+    id
+    index
+    isIf
+    isElse
+    options {
+      id
+      index
+    }
+    isReturn
+    formOutput {
+      id
+      title
+    }
+    nextQuestion {
+      id
+      index
+    }
+  }
+}
+
+mutation updateLogic(
+  $id: Int!
+  $isElse: Boolean
+  $options: [Int!]
+  $isReturn: Boolean
+  $nextQuestionId: Int
+  $formOutputId: Int
+) {
+  updateLogic(
+    id: $id
+    isElse: $isElse
+    options: $options
+    isReturn: $isReturn
+    nextQuestionId: $nextQuestionId
+    formOutputId: $formOutputId
+  ) {
+    __typename
+    id
+    index
+    isIf
+    isElse
+    options {
+      id
+      index
+    }
+    isReturn
+    formOutput {
+      id
+      title
+    }
+    nextQuestion {
+      id
+      index
+    }
+  }
+}

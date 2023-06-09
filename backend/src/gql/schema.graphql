@@ -1,0 +1,95 @@
+type Form {
+  id: Int!
+  title: String!
+  questions: [Question!]
+  responses: [Response!]
+  formOutputs: [FormOutput!]
+}
+
+type Question {
+  id: Int!
+  index: Int!
+  content: String!
+  multiple: Boolean!
+  form: Form
+  options: [Option!]
+  logics: [Logic!]
+}
+
+type Option {
+  id: Int!
+  index: Int!
+  content: String!
+  question: Question
+  responses: [Response!]
+}
+
+type Response {
+  id: Int!
+  selectedOptions: [Option!]
+  option: Option
+  form: Form
+}
+
+type FormOutput {
+  id: Int!
+  title: String!
+  content: String!
+  form: Form
+}
+
+type Logic {
+  id: Int!
+  index: Int!
+  question: Question
+  isIf: Boolean!
+  isElse: Boolean!
+  options: [Option!]
+  isReturn: Boolean!
+  formOutput: FormOutput
+  nextQuestion: Question
+}
+
+type Query {
+  forms: [Form!]!
+  form(id: Int!): Form
+  questions: [Question!]!
+  question(id: Int!): Question
+  options: [Option!]!
+  option(id: Int!): Option
+  responses: [Response!]!
+  response(id: Int!): Response
+}
+
+type Mutation {
+  createForm(title: String): Form
+  updateForm(id: Int!, title: String!): Form
+  deleteForm(id: Int!): Boolean!
+  createQuestion(formId: Int!, content: String, multiple: Boolean): Question
+  updateQuestion(
+    id: Int!
+    index: Int
+    content: String
+    multiple: Boolean
+  ): Question
+  deleteQuestion(id: Int!): Boolean!
+  createOption(questionId: Int!, index: Int, content: String): Option
+  updateOption(id: Int!, index: Int, content: String): Option
+  deleteOption(id: Int!): Boolean!
+  createResponse(formId: Int!, optionIds: [Int!]!): Response
+  updateResponse(id: Int!, optionIds: [Int!]!): Response
+  deleteResponse(id: Int!): Boolean!
+  createFormOutput(formId: Int!): FormOutput
+  updateFormOutput(id: Int!, title: String, content: String): FormOutput
+  deleteFormOutput(id: Int!): Boolean!
+  createLogic(questionId: Int!, isElse: Boolean!): Logic
+  updateLogic(
+    id: Int!
+    isElse: Boolean
+    options: [Int!]
+    isReturn: Boolean
+    formOutputId: Int
+    nextQuestionId: Int
+  ): Logic
+  deleteLogic(id: Int!): Boolean!
+}

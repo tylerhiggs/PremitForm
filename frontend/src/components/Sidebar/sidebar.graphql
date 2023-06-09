@@ -1,0 +1,17 @@
+query GetForms {
+  forms {
+    id
+    title
+  }
+}
+
+mutation CreateForm($title: String) {
+  createForm(title: $title) {
+    id
+    title
+  }
+}
+
+mutation deleteForm($id: Int!) {
+  deleteForm(id: $id)
+}

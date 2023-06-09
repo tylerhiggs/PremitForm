@@ -1,0 +1,34 @@
+query GetFormOutputs($formId: Int!) {
+  form(id: $formId) {
+    __typename
+    id
+    formOutputs {
+      __typename
+      id
+      content
+      title
+    }
+  }
+}
+
+mutation CreateFormOutput($formId: Int!) {
+  createFormOutput(formId: $formId) {
+    __typename
+    id
+    content
+    title
+  }
+}
+
+mutation UpdateFormOutput($id: Int!, $content: String, $title: String) {
+  updateFormOutput(id: $id, content: $content, title: $title) {
+    __typename
+    id
+    title
+    content
+  }
+}
+
+mutation DeleteFormOutput($id: Int!) {
+  deleteFormOutput(id: $id)
+}
