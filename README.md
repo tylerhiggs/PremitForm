@@ -22,3 +22,4 @@ npm run dev
 
 Then open a browser and go to http://localhost:5173/ and create a form by pressing the purple "+1" button on the left side of the screen
 
+Watch the demo [here](https://www.loom.com/share/041a450045a14867b28b3f52f4308cd5)
